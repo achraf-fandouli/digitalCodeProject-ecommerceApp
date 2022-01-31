@@ -1,7 +1,9 @@
 package com.digitalcode.smartmunue.controller;
 
+import com.digitalcode.smartmunue.dto.ProductDTO;
 import com.digitalcode.smartmunue.model.Category;
 import com.digitalcode.smartmunue.service.CategoryService;
+import com.digitalcode.smartmunue.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,10 @@ public class AdminController {
 
     @Autowired
     CategoryService categoryService;
+
+
+    @Autowired
+    ProductService productService;
 
 
     @GetMapping("/admin")
@@ -51,16 +57,28 @@ public class AdminController {
 
     @GetMapping("/admin/categories/update/{id}")
     public String updateCat(@PathVariable int id, Model model) {
-        Optional<Category> category=categoryService.getCatById(id);
-        if (category.isPresent()){
-            model.addAttribute("category",category.get());
+        Optional<Category> category = categoryService.getCatById(id);
+        if (category.isPresent()) {
+            model.addAttribute("category", category.get());
             return "categoriesAdd";
-        }else {
+        } else {
             return "404";
         }
     }
 
+    //Product Section
+    @GetMapping("/admin/products")
+    public String Products(Model model) {
+        model.addAttribute("products", productService.getAllProduct());
+        return "products";
+    }
 
+    @GetMapping("/admin/products/add")
+    public String ProductAddGet(Model model) {
+        model.addAttribute("productDTO", new ProductDTO());
+        model.addAttribute("categories", categoryService.getAllCategory());
+        return "productsAdd";
+    }
 
 
 }
