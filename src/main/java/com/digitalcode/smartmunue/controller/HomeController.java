@@ -36,6 +36,12 @@ public class HomeController {
         return "shop";
     }
 
+    /**
+     *public String viewProduct(Model model, @PathVariable int id): let to display the product view with all it's details
+     * @param model support to add attribute to our model in this case the attribute is : "product"
+     * @param id of selected product to display
+     * @return the view with product details
+     */
     @GetMapping({"/shop/viewproduct/{id}"})
     public String viewProduct(Model model, @PathVariable int id) {
         model.addAttribute("product", productService.getProductById(id).get());
