@@ -100,12 +100,6 @@
 							<artifactId>spring-boot-configuration-processor</artifactId>
 						</exclude>
 					</excludes>
-<!--					<image>
-						<builder>paketobuildpacks/builder:tiny</builder>
-						<env>
-							<BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
-						</env>
-					</image>-->
 				</configuration>
 			</plugin>
 		</plugins>
