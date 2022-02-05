@@ -26,7 +26,6 @@ public class User {
     @Email(message = "{errors.invalid_email}")
     private String email;
 
-    @NotEmpty
     private String password;
 
     //One role can have multiple users, And One user can have multiple roles
