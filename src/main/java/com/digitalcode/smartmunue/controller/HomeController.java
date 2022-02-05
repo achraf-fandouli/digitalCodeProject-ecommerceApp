@@ -1,5 +1,6 @@
 package com.digitalcode.smartmunue.controller;
 
+import com.digitalcode.smartmunue.global.GlobalData;
 import com.digitalcode.smartmunue.service.CategoryService;
 import com.digitalcode.smartmunue.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class HomeController {
 
     @GetMapping({"/", "/home"})
     public String home(Model model) {
+        model.addAttribute("cartCount", GlobalData.cart.size());
         return "index";
     }
 
@@ -26,25 +28,29 @@ public class HomeController {
     public String shop(Model model) {
         model.addAttribute("categories", categoryService.getAllCategory());
         model.addAttribute("products", productService.getAllProduct());
+        model.addAttribute("cartCount", GlobalData.cart.size());
         return "shop";
     }
 
     @GetMapping({"/shop/category/{id}"})
     public String shopByCategory(Model model, @PathVariable int id) {
         model.addAttribute("categories", categoryService.getAllCategory());
+        model.addAttribute("cartCount", GlobalData.cart.size());
         model.addAttribute("products", productService.getAllProductByCategoryId(id));
         return "shop";
     }
 
     /**
-     *public String viewProduct(Model model, @PathVariable int id): let to display the product view with all it's details
+     * public String viewProduct(Model model, @PathVariable int id): let to display the product view with all it's details
+     *
      * @param model support to add attribute to our model in this case the attribute is : "product"
-     * @param id of selected product to display
+     * @param id    of selected product to display
      * @return the view with product details
      */
     @GetMapping({"/shop/viewproduct/{id}"})
     public String viewProduct(Model model, @PathVariable int id) {
         model.addAttribute("product", productService.getProductById(id).get());
+        model.addAttribute("cartCount", GlobalData.cart.size());
         return "viewProduct";
     }
 }
