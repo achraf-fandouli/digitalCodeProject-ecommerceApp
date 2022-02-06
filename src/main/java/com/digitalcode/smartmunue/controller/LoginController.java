@@ -1,5 +1,6 @@
 package com.digitalcode.smartmunue.controller;
 
+import com.digitalcode.smartmunue.global.GlobalData;
 import com.digitalcode.smartmunue.model.Role;
 import com.digitalcode.smartmunue.model.User;
 import com.digitalcode.smartmunue.repository.RoleRepository;
@@ -30,6 +31,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login(){
+        GlobalData.cart.clear();
         return "login";
     }
 
